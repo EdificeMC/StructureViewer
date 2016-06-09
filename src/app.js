@@ -77,18 +77,18 @@ function onDocumentMouseWheel(event) {
         // WebKit
         fov -= event.wheelDeltaY * 0.05;
         // If FOV is negative, it inverts the structure
-        fov = fov < 0 ? 1 : fov;
+        fov = fov <= 0 ? 1 : fov;
         // If FOV goes above ~180, it inverts the structure
         fov = fov > 150 ? 150 : fov;
     } else if (event.wheelDelta) {
         // Opera / Explorer 9
         fov -= event.wheelDelta * 0.05;
-        fov = fov < 0 ? 1 : fov;
+        fov = fov <= 0 ? 1 : fov;
         fov = fov > 150 ? 150 : fov;
     } else if (event.detail) {
         // Firefox
         fov += event.detail * 1.0;
-        fov = fov < 0 ? 1 : fov;
+        fov = fov <= 0 ? 1 : fov;
         fov = fov > 150 ? 150 : fov;
     }
     camera.projectionMatrix.makePerspective(fov, window.innerWidth / window.innerHeight, 1, 1100);

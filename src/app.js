@@ -76,7 +76,9 @@ function onDocumentMouseWheel(event) {
     if (event.wheelDeltaY) {
         // WebKit
         fov -= event.wheelDeltaY * 0.05;
+        // If FOV is negative, it inverts the structure
         fov = fov < 0 ? 1 : fov;
+        // If FOV goes above ~180, it inverts the structure
         fov = fov > 150 ? 150 : fov;
     } else if (event.wheelDelta) {
         // Opera / Explorer 9

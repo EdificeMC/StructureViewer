@@ -6,7 +6,8 @@ import THREE from 'three';
 
 let scene, camera, renderer;
 
-let onMouseDownMouseX = 0,
+let fov = 10,
+    onMouseDownMouseX = 0,
     onMouseDownMouseY = 0,
     lon = 0,
     lat = 0,
@@ -24,8 +25,8 @@ function init() {
 
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 10000);
-    camera.position.z = 15;
+    camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.z = 0;
 
     let loader = new THREE.TextureLoader();
     let texture = loader.load('assets/gold_block.png');
@@ -47,6 +48,7 @@ function init() {
     document.body.appendChild(renderer.domElement);
     
     document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    document.addEventListener( 'wheel', onDocumentMouseWheel, false );
 
 }
 
@@ -68,6 +70,20 @@ function onDocumentMouseMove(event) {
 function onDocumentMouseUp(event) {
     document.removeEventListener('mousemove', onDocumentMouseMove, false);
     document.removeEventListener('mouseup', onDocumentMouseUp, false);
+}
+
+function onDocumentMouseWheel(event) {
+    // WebKit
+    if (event.wheelDeltaY) {
+        fov -= event.wheelDeltaY * 0.05;
+        // Opera / Explorer 9
+    } else if (event.wheelDelta) {
+        fov -= event.wheelDelta * 0.05;
+        // Firefox
+    } else if (event.detail) {
+        fov += event.detail * 1.0;
+    }
+    camera.projectionMatrix.makePerspective(fov, window.innerWidth / window.innerHeight, 1, 1100);
 }
 
 function animate() {

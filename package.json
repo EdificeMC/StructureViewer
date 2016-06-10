@@ -1,8 +1,9 @@
 {
-  "name": "structure-viewer",
+  "name": "edifice-structure-viewer",
+  "private": true,
   "version": "1.0.0",
   "description": "3D Structure viewer for Edifice",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js --hot --inline --progress --devtool eval"
   },
@@ -17,17 +18,17 @@
   },
   "homepage": "https://github.com/EdificeMC/StructureViewer#readme",
   "devDependencies": {
-    "babel-core": "^6.9.1",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-es2015-loose": "^7.0.0",
-    "json-loader": "^0.5.4",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "babel-core": "6.9.1",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-es2015-loose": "7.0.0",
+    "json-loader": "0.5.4",
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
-    "lodash.get": "^4.3.0",
-    "lodash.merge": "^4.4.0",
-    "three": "^0.77.1"
+    "lodash.get": "4.3.0",
+    "lodash.merge": "4.4.0",
+    "three": "0.77.1"
   }
 }

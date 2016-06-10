@@ -6,7 +6,6 @@ import THREE from 'three';
 import get from 'lodash.get';
 import merge from 'lodash.merge';
 import mappings from '../assets/mappings.json';
-import structureSchematic from './testStructure.json'
 
 let scene, camera, renderer;
 let loader = new THREE.TextureLoader();
@@ -20,24 +19,20 @@ let fov = 10,
     phi = 0,
     theta = 0;
 
-init();
-animate();
-
-function init() {
-
+export default function(structureSchematic) {
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 0;
 
-    for(let block of structureSchematic.blocks) {
+    for (let block of structureSchematic.blocks) {
         let geometry = new THREE.BoxGeometry(1, 1, 1);
         geometry.translate(block.Position.X, block.Position.Y, block.Position.Z);
-        
+
         let mesh = new THREE.Mesh(geometry, getMaterial(block));
         scene.add(mesh)
     }
-    
+
     scene.add(new THREE.AmbientLight(0xcccccc))
 
     renderer = new THREE.WebGLRenderer();
@@ -45,10 +40,11 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     document.body.appendChild(renderer.domElement);
-    
-    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-    document.addEventListener( 'wheel', onDocumentMouseWheel, false );
 
+    document.addEventListener('mousedown', onDocumentMouseDown, false);
+    document.addEventListener('wheel', onDocumentMouseWheel, false);
+
+    animate();
 }
 
 function getMaterial(block) {
@@ -56,20 +52,22 @@ function getMaterial(block) {
     const blockData = parseBlockType(rawType);
     const baseType = blockData.baseType;
     const properties = blockData.properties;
-    
+
     let blockMapping = mappings[baseType];
-    if(!blockMapping) {
+    if (!blockMapping) {
         console.log('No mapping found for ' + baseType)
-        // Material is the no texture material by default
-        return new THREE.MeshPhongMaterial({map: loader.load('assets/notexture.png')});
+            // Material is the no texture material by default
+        return new THREE.MeshPhongMaterial({
+            map: loader.load('assets/notexture.png')
+        });
     }
-    
+
     // texturePath can potentially be an array of paths instead of a single string
     let texturePath, materialProperties;
-    if(blockMapping instanceof Object) {
-        if(properties) {
-            for(let key in properties) {
-                if(!blockMapping[key]) {
+    if (blockMapping instanceof Object) {
+        if (properties) {
+            for (let key in properties) {
+                if (!blockMapping[key]) {
                     // The property is unimportant concerning textures, such as direction
                     continue;
                 }
@@ -84,40 +82,44 @@ function getMaterial(block) {
         texturePath = blockMapping;
         materialProperties = {};
     }
-    
-    if(Array.isArray(texturePath)) {
+
+    if (Array.isArray(texturePath)) {
         // There are different textures for each side of the block
-        texturePath = texturePath.map(path => new THREE.MeshPhongMaterial(merge({map: getBlockTexture(path)}, materialProperties)))
+        texturePath = texturePath.map(path => new THREE.MeshPhongMaterial(merge({
+            map: getBlockTexture(path)
+        }, materialProperties)))
         return new THREE.MeshFaceMaterial(texturePath);
     } else {
         // Same texture for every side;
-        return new THREE.MeshPhongMaterial(merge({map: getBlockTexture(texturePath)}, materialProperties));
+        return new THREE.MeshPhongMaterial(merge({
+            map: getBlockTexture(texturePath)
+        }, materialProperties));
     }
 }
 
 function parseBlockType(rawType) {
     const bracketInd = rawType.indexOf('[');
     // Check for the opening square bracket on blocks w/ extra properties
-    if(bracketInd === -1) {
+    if (bracketInd === -1) {
         return {
             baseType: rawType,
             properties: null
         }
     }
-    
+
     // Split up the raw type into the base type ('minecraft:quartz_block') and properties ('variant=default')
     const baseType = rawType.substring(0, bracketInd);
     const propertiesString = rawType.substring(bracketInd + 1, rawType.length - 1);
     const propertiesStringArray = propertiesString.split(',');
     let properties = {};
-    for(const property of propertiesStringArray) {
+    for (const property of propertiesStringArray) {
         // Parse each 'key=value' property
         let eqInd = property.indexOf('=');
         const key = property.substring(0, eqInd);
         const value = property.substring(eqInd + 1, property.length);
         properties[key] = value;
     }
-    
+
     return {
         baseType,
         properties
@@ -171,18 +173,18 @@ function onDocumentMouseWheel(event) {
 }
 
 function animate() {
-    requestAnimationFrame( animate );
-    
-    lon += .15;
-	lat = Math.max( - 85, Math.min( 85, lat ) );
-	phi = THREE.Math.degToRad( 90 - lat );
-	theta = THREE.Math.degToRad( lon );
-    
-    camera.position.x = 100 * Math.sin( phi ) * Math.cos( theta );
-	camera.position.y = 100 * Math.cos( phi );
-	camera.position.z = 100 * Math.sin( phi ) * Math.sin( theta );
-	camera.lookAt( scene.position );
+    requestAnimationFrame(animate);
 
-    renderer.render( scene, camera );
+    lon += .15;
+    lat = Math.max(-85, Math.min(85, lat));
+    phi = THREE.Math.degToRad(90 - lat);
+    theta = THREE.Math.degToRad(lon);
+
+    camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
+    camera.position.y = 100 * Math.cos(phi);
+    camera.position.z = 100 * Math.sin(phi) * Math.sin(theta);
+    camera.lookAt(scene.position);
+
+    renderer.render(scene, camera);
 
 }

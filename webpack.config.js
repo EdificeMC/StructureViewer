@@ -2,13 +2,13 @@ let path = require('path');
 
 module.exports = {
     devServer: {
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 3000,
         headers: {
             "Access-Control-Allow-Origin": "*"
         }
     },
-    entry: './src/app',
+    entry: './src/index',
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js'
@@ -24,6 +24,6 @@ module.exports = {
         }, {
             test: /\.json$/,
             loader: 'json-loader'
-        }, ]
+        }]
     }
 };

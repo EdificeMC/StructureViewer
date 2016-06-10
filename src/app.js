@@ -7,6 +7,7 @@ import get from 'lodash.get';
 import merge from 'lodash.merge';
 import mappings from '../assets/mappings.json';
 
+let rootDir;
 let scene, camera, renderer;
 let loader = new THREE.TextureLoader();
 let fov = 10,
@@ -19,7 +20,8 @@ let fov = 10,
     phi = 0,
     theta = 0;
 
-export default function(canvas, structureSchematic) {
+export default function(canvas, structureSchematic, rootDirOverride) {
+    rootDir = rootDirOverride || '../'
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
@@ -57,7 +59,7 @@ function getMaterial(block) {
         console.log('No mapping found for ' + baseType)
             // Material is the no texture material by default
         return new THREE.MeshPhongMaterial({
-            map: loader.load('assets/notexture.png')
+            map: loader.load(rootDir + 'assets/notexture.png')
         });
     }
 
@@ -126,7 +128,7 @@ function parseBlockType(rawType) {
 }
 
 function getBlockTexture(texturePath) {
-    return loader.load('assets/R3D.CRAFT/blocks/' + texturePath + '.png');
+    return loader.load(rootDir + 'assets/R3D.CRAFT/blocks/' + texturePath + '.png');
 }
 
 function onDocumentMouseDown(event) {

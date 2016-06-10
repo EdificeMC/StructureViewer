@@ -19,7 +19,7 @@ let fov = 10,
     phi = 0,
     theta = 0;
 
-export default function(structureSchematic) {
+export default function(canvas, structureSchematic) {
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
@@ -35,11 +35,10 @@ export default function(structureSchematic) {
 
     scene.add(new THREE.AmbientLight(0xcccccc))
 
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({
+        canvas
+    });
     renderer.setClearColor(0xbfd1e5);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    document.body.appendChild(renderer.domElement);
 
     document.addEventListener('mousedown', onDocumentMouseDown, false);
     document.addEventListener('wheel', onDocumentMouseWheel, false);

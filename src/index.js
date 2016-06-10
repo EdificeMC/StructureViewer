@@ -3,4 +3,5 @@
 import sv from './app';
 import structureSchematic from './testStructure.json'
 
-sv(structureSchematic);
+console.log(document.getElementById('structure-model'));
+sv(document.getElementById('structure-model'), structureSchematic);

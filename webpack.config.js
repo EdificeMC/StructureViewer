@@ -1,5 +1,4 @@
-
-var path = require('path');
+let path = require('path');
 
 module.exports = {
     devServer: {
@@ -20,8 +19,11 @@ module.exports = {
             loader: 'babel-loader',
             exclude: /node_modules/,
             query: {
-               presets: ['es2015-loose']
-           }
-        }]
+                presets: ['es2015-loose']
+            }
+        }, {
+            test: /\.json$/,
+            loader: 'json-loader'
+        }, ]
     }
 };

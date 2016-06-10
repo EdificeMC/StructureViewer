@@ -1,0 +1,38 @@
+(Last updated 03.06.2016)
+
+R3D.CRAFT is a recreation of the default texture pack in Minecraft, a game created by Mojang.
+
+R3D.CRAFT by Thomas Angeland @UniblueMedia is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.
+
+Additional restrictions are listed below.
+
+_
+
+Painting-textures
+
+Images used in kz.png (Minecraft paintings) are made by Kristoffer Zetterstrand.
+Kristoffer Zetterstrand is represented by the Peter Bergman gallery.
+These are original images that Mojang uses for their default paintings.
+These images are labeled under Creative Commons.
+
+Kristoffer Zetterstrand's official homepage: http://zetterstrand.com/
+
+_
+
+YOU CAN;
+
+# Record in-game footage while using R3D.CRAFT as long as you give credit in the description (let's plays, cinematic videos, reviews, etc...).
+# Use all logos, pictures, wallpapers and other graphical work connected to R3D.CRAFT (not textures), freely, as long as you give credit. You can also change the graphical work after your desire, but please give credit.
+# Customize/edit R3D.CRAFT in anyway you like, but keep it privately. Feel free to share videos and screenshots, but remember to give credit despite you using a modified version of R3D.CRAFT. Even though you modify R3D.CRAFT, you have still no rights to claim author rights.
+
+PLEASE, DO NOT;
+
+# Share just the download-link to this texture. If you want people to download this, please display a link to this page, not a Mediafire link.
+# Re-upload this texture or parts of this texture.
+# Republish this thread/duplicate this thread without permission. Translations to other websites is 100% fine (please include original links). There's no need to ask for permission if you are planning to republish this on www.minecraftforum.net or www.planetminecraft.com as this won't be allowed.
+# Use any content from this texture in your own work without permission from the content owner (this does no longer include animations, but please give credit).
+# Remix this texture. Remixes count as a re-upload.
+
+_
+
+Any questions? Email me at unibluemedia@gmail.com

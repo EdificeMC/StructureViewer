@@ -3,9 +3,13 @@
 'use strict';
 
 import THREE from 'three';
+import get from 'lodash.get';
+import merge from 'lodash.merge';
+import mappings from '../assets/mappings.json';
+import structureSchematic from './testStructure.json'
 
 let scene, camera, renderer;
-
+let loader = new THREE.TextureLoader();
 let fov = 10,
     onMouseDownMouseX = 0,
     onMouseDownMouseY = 0,
@@ -15,8 +19,6 @@ let fov = 10,
     onMouseDownLat = 0,
     phi = 0,
     theta = 0;
-
-const structureSchematic = {"_id":"572012ffc476014968eb1ef0","creatorUUID":"5d30e92c-5ae2-4284-a3ee-74bc15077439","name":"Awesome Temple","width":5,"length":5,"height":7,"direction":"SOUTH","finalized":true,"images":[{"deletehash":"scDmXQ2KuwxCr6u","url":"http://i.imgur.com/fUbYcJt.png"}],"blocks":[{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-4,"Y":0,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-4,"Y":0,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-4,"Y":0,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-4,"Y":0,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-4,"Y":0,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":1,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-4,"Y":1,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-4,"Y":1,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":1,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":2,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-4,"Y":2,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-4,"Y":2,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":2,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":3,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-4,"Y":3,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-4,"Y":3,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-4,"Y":3,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":3,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":4,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":4,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":4,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":4,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-4,"Y":4,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-3,"Y":0,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-3,"Y":0,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-3,"Y":0,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-3,"Y":0,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-3,"Y":0,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-3,"Y":1,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-3,"Y":1,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-3,"Y":2,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-3,"Y":2,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-3,"Y":3,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-3,"Y":3,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-3,"Y":4,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-3,"Y":4,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-3,"Y":4,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-3,"Y":4,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-3,"Y":4,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-3,"Y":5,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-3,"Y":5,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-3,"Y":5,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-2,"Y":0,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-2,"Y":0,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-2,"Y":0,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-2,"Y":0,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-2,"Y":0,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-2,"Y":3,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-2,"Y":3,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-2,"Y":4,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-2,"Y":4,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:lit_redstone_lamp","ContentVersion":2},"Position":{"X":-2,"Y":4,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-2,"Y":4,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-2,"Y":4,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-2,"Y":5,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:redstone_block","ContentVersion":2},"Position":{"X":-2,"Y":5,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-2,"Y":5,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-2,"Y":6,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-1,"Y":0,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-1,"Y":0,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-1,"Y":0,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-1,"Y":0,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":-1,"Y":0,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-1,"Y":1,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-1,"Y":1,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-1,"Y":2,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-1,"Y":2,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-1,"Y":3,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":-1,"Y":3,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-1,"Y":4,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-1,"Y":4,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-1,"Y":4,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:quartz_block[variant=default]","ContentVersion":2},"Position":{"X":-1,"Y":4,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":-1,"Y":4,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-1,"Y":5,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-1,"Y":5,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:emerald_block","ContentVersion":2},"Position":{"X":-1,"Y":5,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":0,"Y":0,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":0,"Y":0,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":0,"Y":0,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":0,"Y":0,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:gold_block","ContentVersion":2},"Position":{"X":0,"Y":0,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":1,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":0,"Y":1,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":0,"Y":1,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":1,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":2,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":0,"Y":2,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":0,"Y":2,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":2,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":3,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":0,"Y":3,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":0,"Y":3,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:glass","ContentVersion":2},"Position":{"X":0,"Y":3,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":3,"Z":4},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":4,"Z":0},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":4,"Z":1},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":4,"Z":2},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":4,"Z":3},"ContentVersion":1},{"BlockState":{"BlockState":"minecraft:diamond_block","ContentVersion":2},"Position":{"X":0,"Y":4,"Z":4},"ContentVersion":1}]};
 
 init();
 animate();
@@ -28,14 +30,11 @@ function init() {
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 0;
 
-    let loader = new THREE.TextureLoader();
-    let texture = loader.load('assets/gold_block.png');
-    for (let block of structureSchematic.blocks) {
+    for(let block of structureSchematic.blocks) {
         let geometry = new THREE.BoxGeometry(1, 1, 1);
         geometry.translate(block.Position.X, block.Position.Y, block.Position.Z);
-
-        let material = new THREE.MeshPhongMaterial( { map: texture } );
-        let mesh = new THREE.Mesh(geometry, material);
+        
+        let mesh = new THREE.Mesh(geometry, getMaterial(block));
         scene.add(mesh)
     }
     
@@ -50,6 +49,83 @@ function init() {
     document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     document.addEventListener( 'wheel', onDocumentMouseWheel, false );
 
+}
+
+function getMaterial(block) {
+    const rawType = get(block, 'BlockState.BlockState');
+    const blockData = parseBlockType(rawType);
+    const baseType = blockData.baseType;
+    const properties = blockData.properties;
+    
+    let blockMapping = mappings[baseType];
+    if(!blockMapping) {
+        console.log('No mapping found for ' + baseType)
+        // Material is the no texture material by default
+        return new THREE.MeshPhongMaterial({map: loader.load('assets/notexture.png')});
+    }
+    
+    // texturePath can potentially be an array of paths instead of a single string
+    let texturePath, materialProperties;
+    if(blockMapping instanceof Object) {
+        if(properties) {
+            for(let key in properties) {
+                if(!blockMapping[key]) {
+                    // The property is unimportant concerning textures, such as direction
+                    continue;
+                }
+                texturePath = blockMapping[key][properties[key]];
+            }
+        } else {
+            // The mapping is an object just to specify 3.js related properties, like transparency
+            texturePath = blockMapping.path;
+        }
+        materialProperties = blockMapping.materialProperties || {};
+    } else {
+        texturePath = blockMapping;
+        materialProperties = {};
+    }
+    
+    if(Array.isArray(texturePath)) {
+        // There are different textures for each side of the block
+        texturePath = texturePath.map(path => new THREE.MeshPhongMaterial(merge({map: getBlockTexture(path)}, materialProperties)))
+        return new THREE.MeshFaceMaterial(texturePath);
+    } else {
+        // Same texture for every side;
+        return new THREE.MeshPhongMaterial(merge({map: getBlockTexture(texturePath)}, materialProperties));
+    }
+}
+
+function parseBlockType(rawType) {
+    const bracketInd = rawType.indexOf('[');
+    // Check for the opening square bracket on blocks w/ extra properties
+    if(bracketInd === -1) {
+        return {
+            baseType: rawType,
+            properties: null
+        }
+    }
+    
+    // Split up the raw type into the base type ('minecraft:quartz_block') and properties ('variant=default')
+    const baseType = rawType.substring(0, bracketInd);
+    const propertiesString = rawType.substring(bracketInd + 1, rawType.length - 1);
+    const propertiesStringArray = propertiesString.split(',');
+    let properties = {};
+    for(const property of propertiesStringArray) {
+        // Parse each 'key=value' property
+        let eqInd = property.indexOf('=');
+        const key = property.substring(0, eqInd);
+        const value = property.substring(eqInd + 1, property.length);
+        properties[key] = value;
+    }
+    
+    return {
+        baseType,
+        properties
+    };
+}
+
+function getBlockTexture(texturePath) {
+    return loader.load('assets/R3D.CRAFT/blocks/' + texturePath + '.png');
 }
 
 function onDocumentMouseDown(event) {

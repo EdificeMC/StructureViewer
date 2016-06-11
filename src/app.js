@@ -5,7 +5,7 @@
 import THREE from 'three';
 import get from 'lodash.get';
 import merge from 'lodash.merge';
-import mappings from '../assets/mappings.json';
+import mappings from './mappings.json';
 
 const assetsURL = 'http://assets.edificemc.com';
 

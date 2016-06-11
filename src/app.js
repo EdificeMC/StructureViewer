@@ -7,9 +7,12 @@ import get from 'lodash.get';
 import merge from 'lodash.merge';
 import mappings from '../assets/mappings.json';
 
+const assetsURL = 'http://assets.edificemc.com';
+
 let rootDir;
 let scene, camera, renderer;
 let loader = new THREE.TextureLoader();
+loader.crossOrigin = ''; // Allow cross origin requests
 let fov = 10,
     onMouseDownMouseX = 0,
     onMouseDownMouseY = 0,
@@ -59,7 +62,7 @@ function getMaterial(block) {
         console.log('No mapping found for ' + baseType)
             // Material is the no texture material by default
         return new THREE.MeshPhongMaterial({
-            map: loader.load(rootDir + 'assets/notexture.png')
+            map: loader.load(assetsURL + '/notexture.png')
         });
     }
 
@@ -128,7 +131,7 @@ function parseBlockType(rawType) {
 }
 
 function getBlockTexture(texturePath) {
-    return loader.load(rootDir + 'assets/R3D.CRAFT/blocks/' + texturePath + '.png');
+    return loader.load(assetsURL + '/R3D.CRAFT/blocks/' + texturePath + '.png');
 }
 
 function onDocumentMouseDown(event) {

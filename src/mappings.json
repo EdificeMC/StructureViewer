@@ -1,4 +1,5 @@
 {
+    "minecraft:iron_block": "iron_block",
     "minecraft:gold_block": "gold_block",
     "minecraft:diamond_block": "diamond_block",
     "minecraft:emerald_block": "emerald_block",
@@ -12,6 +13,29 @@
     },
     "minecraft:glass": {
         "path": "glass",
+        "materialProperties": {
+            "transparent": true
+        }
+    },
+    "minecraft:stained_glass": {
+        "color": {
+            "white": "glass_white",
+            "orange": "glass_orange",
+            "magenta": "glass_magenta",
+            "lightBlue": "glass_light_blue",
+            "yellow": "glass_yellow",
+            "lime": "glass_lime",
+            "pink": "glass_pink",
+            "gray": "glass_gray",
+            "silver": "glass_silver",
+            "cyan": "glass_cyan",
+            "purple": "glass_purple",
+            "blue": "glass_blue",
+            "brown": "glass_brown",
+            "green": "glass_green",
+            "red": "glass_red",
+            "black": "glass_black"
+        },
         "materialProperties": {
             "transparent": true
         }

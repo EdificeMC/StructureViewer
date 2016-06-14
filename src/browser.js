@@ -5,6 +5,7 @@
 import THREE from 'three';
 import { init } from './common';
 
+let rootDir;
 let scene, camera, renderer;
 let fov = 10,
     onMouseDownMouseX = 0,

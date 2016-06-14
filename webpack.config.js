@@ -8,7 +8,7 @@ module.exports = {
             "Access-Control-Allow-Origin": "*"
         }
     },
-    entry: './dev/browser',
+    entry: './src/index',
     output: {
         path: path.join(__dirname, 'build'),
         filename: 'bundle.js'

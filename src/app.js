@@ -9,7 +9,7 @@ import mappings from './mappings.json';
 
 const assetsURL = 'http://assets.edificemc.com';
 
-let rootDir;
+let doPassiveSpinning;
 let scene, camera, renderer;
 let loader = new THREE.TextureLoader();
 loader.crossOrigin = ''; // Allow cross origin requests
@@ -23,8 +23,8 @@ let fov = 10,
     phi = 0,
     theta = 0;
 
-export default function(canvas, structureSchematic, rootDirOverride) {
-    rootDir = rootDirOverride || '../'
+export default function(canvas, structureSchematic, spinning) {
+    doPassiveSpinning = spinning
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
@@ -179,7 +179,10 @@ function onDocumentMouseWheel(event) {
 function animate() {
     requestAnimationFrame(animate);
 
-    lon += .15;
+    if(doPassiveSpinning) {
+        lon += .15;
+    }
+    
     lat = Math.max(-85, Math.min(85, lat));
     phi = THREE.Math.degToRad(90 - lat);
     theta = THREE.Math.degToRad(lon);

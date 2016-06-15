@@ -157,19 +157,19 @@ function onDocumentMouseUp(event) {
 function onDocumentMouseWheel(event) {
     if (event.wheelDeltaY) {
         // WebKit
-        fov -= event.wheelDeltaY * 0.05;
+        fov -= event.wheelDeltaY * 0.01;
         // If FOV is negative, it inverts the structure
         fov = fov <= 0 ? 1 : fov;
         // If FOV goes above ~180, it inverts the structure
         fov = fov > 150 ? 150 : fov;
     } else if (event.wheelDelta) {
         // Opera / Explorer 9
-        fov -= event.wheelDelta * 0.05;
+        fov -= event.wheelDelta * 0.01;
         fov = fov <= 0 ? 1 : fov;
         fov = fov > 150 ? 150 : fov;
     } else if (event.detail) {
         // Firefox
-        fov += event.detail * 1.0;
+        fov += event.detail * 0.2;
         fov = fov <= 0 ? 1 : fov;
         fov = fov > 150 ? 150 : fov;
     }

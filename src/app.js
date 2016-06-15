@@ -41,7 +41,8 @@ export default function(canvas, structureSchematic, spinning) {
     scene.add(new THREE.AmbientLight(0xcccccc))
 
     renderer = new THREE.WebGLRenderer({
-        canvas
+        canvas,
+        preserveDrawingBuffer: true
     });
     renderer.setClearColor(0xbfd1e5);
 

@@ -7,7 +7,7 @@ import get from 'lodash.get';
 import merge from 'lodash.merge';
 import mappings from './mappings.json';
 
-const assetsURL = 'http://assets.edificemc.com';
+const assetsURL = 'https://assets.edificemc.com';
 
 let doPassiveSpinning;
 let scene, camera, renderer;
@@ -183,7 +183,7 @@ function animate() {
     if(doPassiveSpinning) {
         lon += .15;
     }
-    
+
     lat = Math.max(-85, Math.min(85, lat));
     phi = THREE.Math.degToRad(90 - lat);
     theta = THREE.Math.degToRad(lon);

@@ -13,15 +13,16 @@ let doPassiveSpinning;
 let scene, camera, renderer;
 let loader = new THREE.TextureLoader();
 loader.crossOrigin = ''; // Allow cross origin requests
-let fov = 10,
-    onMouseDownMouseX = 0,
-    onMouseDownMouseY = 0,
-    lon = 0,
-    lat = 0,
-    onMouseDownLon = 0,
-    onMouseDownLat = 0,
-    phi = 0,
-    theta = 0;
+let fov = 10;
+let onMouseDownMouseX = 0;
+let onMouseDownMouseY = 0;
+let lon = 0;
+let lat = 0;
+let onMouseDownLon = 0;
+let onMouseDownLat = 0;
+let phi = 0;
+let theta = 0;
+let cameraFocus;
 
 export default function(canvas, structureSchematic, spinning) {
     doPassiveSpinning = spinning
@@ -30,13 +31,24 @@ export default function(canvas, structureSchematic, spinning) {
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 0;
 
+    let count = 0;
+    let sumX = 0;
+    let sumY = 0;
+    let sumZ = 0;
     for (let block of structureSchematic.blocks) {
         let geometry = new THREE.BoxGeometry(1, 1, 1);
         geometry.translate(block.Position.X, block.Position.Y, block.Position.Z);
 
         let mesh = new THREE.Mesh(geometry, getMaterial(block));
-        scene.add(mesh)
+        scene.add(mesh);
+        
+        count++;
+        sumX += block.Position.X;
+        sumY += block.Position.Y;
+        sumZ += block.Position.Z;
     }
+    // Focus the camera on the middle of the structure
+    cameraFocus = new THREE.Vector3(sumX / count, sumY / count, sumZ / count);
 
     scene.add(new THREE.AmbientLight(0xcccccc))
 
@@ -191,7 +203,7 @@ function animate() {
     camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
     camera.position.y = 100 * Math.cos(phi);
     camera.position.z = 100 * Math.sin(phi) * Math.sin(theta);
-    camera.lookAt(scene.position);
+    camera.lookAt(cameraFocus);
 
     renderer.render(scene, camera);
 

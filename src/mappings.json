@@ -1,9 +1,49 @@
 {
-    "minecraft:iron_block": "iron_block",
-    "minecraft:gold_block": "gold_block",
+    "minecraft:beacon": ["glass", "glass", "glass", "obsidian", "glass", "glass"],
+    "minecraft:coal_block": "coal_block",
+    "minecraft:cobblestone": "cobblestone",
     "minecraft:diamond_block": "diamond_block",
+    "minecraft:dirt": {
+        "variant": {
+            "dirt": "dirt",
+            "coarse_dirt": "coarse_dirt",
+            "podzol": ["dirt_podzol_side", "dirt_podzol_side", "dirt_podzol_top", "dirt", "dirt_podzol_side", "dirt_podzol_side"]
+        }
+    },
     "minecraft:emerald_block": "emerald_block",
-    "minecraft:redstone_block": "redstone_block",
+    "minecraft:glass": {
+        "path": "glass",
+        "materialProperties": {
+            "transparent": true
+        }
+    },
+    "minecraft:gold_block": "gold_block",
+    "minecraft:iron_block": "iron_block",
+    "minecraft:lit_redstone_lamp": "redstone_lamp_on",
+    "minecraft:log": {
+        "variant": {
+            "oak": ["log_oak", "log_oak", "log_oak_top", "log_oak_top", "log_oak", "log_oak"],
+            "spruce": ["log_spruce", "log_spruce", "log_spruce_top", "log_spruce_top", "log_spruce", "log_spruce"],
+            "birch": ["log_birch", "log_birch", "log_birch_top", "log_birch_top", "log_birch", "log_birch"],
+            "jungle": ["log_jungle", "log_jungle", "log_jungle_top", "log_jungle_top", "log_jungle", "log_jungle"]
+        }
+    },
+    "minecraft:log2": {
+        "variant": {
+            "acacia": ["log_acacia", "log_acacia", "log_acacia_top", "log_acacia_top", "log_acacia", "log_acacia"],
+            "dark_oak": ["log_big_oak", "log_big_oak", "log_big_oak_top", "log_big_oak_top", "log_big_oak", "log_big_oak"]
+        }
+    },
+    "minecraft:planks": {
+        "variant": {
+            "oak": "planks_oak",
+            "spruce": "planks_spruce",
+            "birch": "planks_birch",
+            "jungle": "planks_jungle",
+            "acacia": "planks_acacia",
+            "dark_oak": "planks_big_oak"
+        }
+    },
     "minecraft:quartz_block": {
         "variant": {
             "default": ["quartz_block_side", "quartz_block_side", "quartz_block_top", "quartz_block_bottom", "quartz_block_side", "quartz_block_side"],
@@ -11,12 +51,7 @@
             "lines": ["quartz_block_lines", "quartz_block_lines", "quartz_block_lines_top", "quartz_block_lines_top", "quartz_block_lines", "quartz_block_lines"]
         }
     },
-    "minecraft:glass": {
-        "path": "glass",
-        "materialProperties": {
-            "transparent": true
-        }
-    },
+    "minecraft:redstone_block": "redstone_block",
     "minecraft:stained_glass": {
         "color": {
             "white": "glass_white",
@@ -40,5 +75,12 @@
             "transparent": true
         }
     },
-    "minecraft:lit_redstone_lamp": "redstone_lamp_on"
+    "minecraft:stonebrick": {
+        "variant": {
+            "stonebrick": "stonebrick",
+             "mossy_stonebrick": "stonebrick_mossy",
+             "cracked_stonebrick": "stonebrick_cracked",
+             "chiseled_stonebrick": "stonebrick_carved"
+        }
+    }
 }

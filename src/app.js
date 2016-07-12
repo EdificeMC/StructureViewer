@@ -7,7 +7,8 @@ import get from 'lodash.get';
 import merge from 'lodash.merge';
 import mappings from './mappings.json';
 
-const assetsURL = 'https://assets.edificemc.com';
+const assetsURL = 'https://assets.edificemc.com/';
+const texturePack = 'Faithful';
 
 let doPassiveSpinning;
 let scene, camera, renderer;
@@ -41,7 +42,7 @@ export default function(canvas, structureSchematic, spinning) {
 
         let mesh = new THREE.Mesh(geometry, getMaterial(block));
         scene.add(mesh);
-        
+
         count++;
         sumX += block.Position.X;
         sumY += block.Position.Y;
@@ -75,13 +76,13 @@ function getMaterial(block) {
         console.log('No mapping found for ' + baseType)
             // Material is the no texture material by default
         return new THREE.MeshPhongMaterial({
-            map: loader.load(assetsURL + '/notexture.png')
+            map: loader.load(assetsURL + 'notexture.png')
         });
     }
 
     // texturePath can potentially be an array of paths instead of a single string
     let texturePath, materialProperties;
-    if (blockMapping instanceof Object) {
+    if (blockMapping instanceof Object && !Array.isArray(blockMapping)) {
         if (properties) {
             for (let key in properties) {
                 if (!blockMapping[key]) {
@@ -144,7 +145,7 @@ function parseBlockType(rawType) {
 }
 
 function getBlockTexture(texturePath) {
-    return loader.load(assetsURL + '/R3D.CRAFT/blocks/' + texturePath + '.png');
+    return loader.load(assetsURL + texturePack + '/assets/minecraft/textures/blocks/' + texturePath + '.png');
 }
 
 function onDocumentMouseDown(event) {

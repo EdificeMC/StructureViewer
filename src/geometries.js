@@ -25,12 +25,16 @@ function stairs(blockData) {
         // const stepShape = new THREE.Shape(stepPts);
         //
         // // geometry = mergeGeometries([base, stepShape.extrude({amount: 0.5})]);
-        // geometry = stepShape.extrude({amount: 0.5});
 
         let step1 = new THREE.BoxGeometry(1, 0.5, 0.5);
         step1.translate(0, 0.25, 0.25);
         let step2 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-        step2.translate(0.25, 0.25, -0.25);
+
+        if(shape.endsWith('left')) {
+            step2.translate(0.25, 0.25, -0.25);
+        } else if(shape.endsWith('right')) {
+            step2.translate(-0.25, 0.25, -0.25)
+        }
         geometry = mergeGeometries([base, step1, step2]);
     } else if(shape.startsWith('outer')) {
         // The one with the mostly flat surface except the quarter block bump in the corner

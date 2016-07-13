@@ -75,6 +75,7 @@
             "transparent": true
         }
     },
+    "minecraft:stone_brick_stairs": "stonebrick",
     "minecraft:stonebrick": {
         "variant": {
             "stonebrick": "stonebrick",

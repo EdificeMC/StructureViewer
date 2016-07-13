@@ -6,6 +6,7 @@ import THREE from 'three';
 import get from 'lodash.get';
 import merge from 'lodash.merge';
 import mappings from './mappings.json';
+import geometries from './geometries';
 
 const assetsURL = 'https://assets.edificemc.com/';
 const texturePack = 'Faithful';
@@ -37,10 +38,26 @@ export default function(canvas, structureSchematic, spinning) {
     let sumY = 0;
     let sumZ = 0;
     for (let block of structureSchematic.blocks) {
-        let geometry = new THREE.BoxGeometry(1, 1, 1);
+        const rawType = get(block, 'BlockExtendedState.BlockState') || get(block, 'BlockState.BlockState');
+        const blockData = parseBlockType(rawType);
+
+        let geoFn;
+        for(let geometryType in geometries) {
+            if(blockData.baseType.includes(geometryType)) {
+                geoFn = geometries[geometryType];
+            }
+        }
+
+        let geometry;
+        if(geoFn) {
+            geometry = geoFn(blockData);
+        } else {
+            geometry = new THREE.BoxGeometry(1, 1, 1);
+        }
+
         geometry.translate(block.Position.X, block.Position.Y, block.Position.Z);
 
-        let mesh = new THREE.Mesh(geometry, getMaterial(block));
+        let mesh = new THREE.Mesh(geometry, getMaterial(blockData));
         scene.add(mesh);
 
         count++;
@@ -65,9 +82,7 @@ export default function(canvas, structureSchematic, spinning) {
     animate();
 }
 
-function getMaterial(block) {
-    const rawType = get(block, 'BlockState.BlockState');
-    const blockData = parseBlockType(rawType);
+function getMaterial(blockData) {
     const baseType = blockData.baseType;
     const properties = blockData.properties;
 

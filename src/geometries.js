@@ -5,11 +5,22 @@ import THREE from 'three';
 const dummyMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 
 function slab(blockData) {
-    return new THREE.BoxGeometry(1, 0.5, 1);
+    let slab = new THREE.BoxGeometry(1, 0.5, 1);
+    // Possibly no block data if called internally (stairs)
+    if(blockData) {
+        if(blockData.properties.half === 'top') {
+            // Shift the slab to the top half of the block
+            slab.translate(0, 0.25, 0);
+        } else {
+            // Shift the slab to the bottom half of the block
+            slab.translate(0, -0.25, 0);
+        }
+    }
+    return slab;
 }
 
 function stairs(blockData) {
-    const base = slab(blockData);
+    const base = slab();
 
     const isUpsideDown = blockData.properties.half === 'top';
     let stepTransformY = 0.25;
@@ -89,5 +100,5 @@ function mergeGeometries(geometries) {
 }
 
 export default {
-    stairs
+    stairs, slab
 }

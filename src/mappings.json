@@ -2,6 +2,7 @@
     "minecraft:beacon": ["glass", "glass", "glass", "obsidian", "glass", "glass"],
     "minecraft:coal_block": "coal_block",
     "minecraft:cobblestone": "cobblestone",
+    "minecraft:dark_oak_stairs": "planks_big_oak",
     "minecraft:diamond_block": "diamond_block",
     "minecraft:dirt": {
         "variant": {
@@ -52,6 +53,7 @@
         }
     },
     "minecraft:redstone_block": "redstone_block",
+    "minecraft:spruce_stairs": "planks_spruce",
     "minecraft:stained_glass": {
         "color": {
             "white": "glass_white",
@@ -82,6 +84,22 @@
              "mossy_stonebrick": "stonebrick_mossy",
              "cracked_stonebrick": "stonebrick_cracked",
              "chiseled_stonebrick": "stonebrick_carved"
+        }
+    },
+    "minecraft:stone_slab": {
+        "variant": {
+            "stone": ["stone_slab_side", "stone_slab_side", "stone_slab_top", "stone_slab_top", "stone_slab_side", "stone_slab_side"],
+            "sandstone": ["sandstone_normal", "sandstone_normal", "sandstone_top", "sandstone_bottom", "sandstone_normal", "sandstone_normal"],
+            "cobblestone": "cobblestone",
+            "brick": "brick",
+            "stone_brick": "stonebrick",
+            "nether_brick": "nether_brick",
+            "quartz": ["quartz_block_side", "quartz_block_side", "quartz_block_top", "quartz_block_bottom", "quartz_block_side", "quartz_block_side"]
+        }
+    },
+    "minecraft:stone_slab2": {
+        "variant": {
+            "red_sandstone": ["red_sandstone_normal", "red_sandstone_normal", "red_sandstone_top", "red_sandstone_bottom", "red_sandstone_normal", "red_sandstone_normal"]
         }
     }
 }

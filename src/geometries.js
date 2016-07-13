@@ -9,15 +9,22 @@ function slab(blockData) {
 }
 
 function stairs(blockData) {
-    // TODO other shapes other than straight and also other orientations (upside down and whatever else)
     const base = slab(blockData);
-    base.translate(0, -0.25, 0)
+
+    const isUpsideDown = blockData.properties.half === 'top';
+    let stepTransformY = 0.25;
+    let baseTransformY = -0.25;
+    if(isUpsideDown) {
+        stepTransformY *= -1;
+        baseTransformY *= -1;
+    }
+    base.translate(0, baseTransformY, 0);
 
     let geometry;
     const shape = blockData.properties.shape;
     if(shape === 'straight') {
         let step = new THREE.BoxGeometry(1, 0.5, 0.5);
-        step.translate(0, 0.25, 0.25);
+        step.translate(0, stepTransformY, 0.25);
         geometry = mergeGeometries([base, step]);
     } else if(shape.startsWith('inner')) {
         // The one with the mostly full block except for a quarter taken out of a corner
@@ -27,22 +34,22 @@ function stairs(blockData) {
         // // geometry = mergeGeometries([base, stepShape.extrude({amount: 0.5})]);
 
         let step1 = new THREE.BoxGeometry(1, 0.5, 0.5);
-        step1.translate(0, 0.25, 0.25);
+        step1.translate(0, stepTransformY, 0.25);
         let step2 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
 
         if(shape.endsWith('left')) {
-            step2.translate(0.25, 0.25, -0.25);
+            step2.translate(0.25, stepTransformY, -0.25);
         } else if(shape.endsWith('right')) {
-            step2.translate(-0.25, 0.25, -0.25)
+            step2.translate(-0.25, stepTransformY, -0.25)
         }
         geometry = mergeGeometries([base, step1, step2]);
     } else if(shape.startsWith('outer')) {
         // The one with the mostly flat surface except the quarter block bump in the corner
         let step = new THREE.BoxGeometry(0.5, 0.5, 0.5);
         if(shape.endsWith('left')) {
-            step.translate(0.25, 0.25, 0.25);
+            step.translate(0.25, stepTransformY, 0.25);
         } else if(shape.endsWith('right')) {
-            step.translate(-0.25, 0.25, 0.25);
+            step.translate(-0.25, stepTransformY, 0.25);
         }
         geometry = mergeGeometries([base, step]);
     } else {

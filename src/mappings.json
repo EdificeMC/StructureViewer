@@ -1,5 +1,10 @@
 {
-    "minecraft:beacon": ["glass", "glass", "glass", "obsidian", "glass", "glass"],
+    "minecraft:beacon": {
+        "path": ["glass", "glass", "glass", "obsidian", "glass", "glass"],
+        "materialProperties": {
+            "transparent": true
+        }
+    },
     "minecraft:coal_block": "coal_block",
     "minecraft:cobblestone": "cobblestone",
     "minecraft:dark_oak_stairs": "planks_big_oak",
@@ -22,6 +27,7 @@
         }
     },
     "minecraft:emerald_block": "emerald_block",
+    "minecraft:fence": "planks_oak",
     "minecraft:glass": {
         "path": "glass",
         "materialProperties": {
@@ -29,7 +35,7 @@
         }
     },
     "minecraft:glass_pane": {
-        "path": ["glass", "glass", "glass_pane_top", "glass_pane_top", "glass", "glass"],
+        "path": "glass",
         "materialProperties": {
             "transparent": true
         }
@@ -94,6 +100,29 @@
             "transparent": true
         }
     },
+    "minecraft:stained_glass_pane": {
+        "color": {
+            "white": "glass_white",
+            "orange": "glass_orange",
+            "magenta": "glass_magenta",
+            "lightBlue": "glass_light_blue",
+            "yellow": "glass_yellow",
+            "lime": "glass_lime",
+            "pink": "glass_pink",
+            "gray": "glass_gray",
+            "silver": "glass_silver",
+            "cyan": "glass_cyan",
+            "purple": "glass_purple",
+            "blue": "glass_blue",
+            "brown": "glass_brown",
+            "green": "glass_green",
+            "red": "glass_red",
+            "black": "glass_black"
+        },
+        "materialProperties": {
+            "transparent": true
+        }
+    },
     "minecraft:stone_brick_stairs": "stonebrick",
     "minecraft:stonebrick": {
         "variant": {
@@ -119,6 +148,7 @@
             "red_sandstone": ["red_sandstone_normal", "red_sandstone_normal", "red_sandstone_top", "red_sandstone_bottom", "red_sandstone_normal", "red_sandstone_normal"]
         }
     },
+    "minecraft:stone_stairs": "cobblestone",
     "minecraft:wooden_slab": {
         "variant": {
             "oak": "planks_oak",

@@ -11,6 +11,16 @@
             "podzol": ["dirt_podzol_side", "dirt_podzol_side", "dirt_podzol_top", "dirt", "dirt_podzol_side", "dirt_podzol_side"]
         }
     },
+    "minecraft:double_wooden_slab": {
+        "variant": {
+            "oak": "planks_oak",
+            "spruce": "planks_spruce",
+            "birch": "planks_birch",
+            "jungle": "planks_jungle",
+            "acacia": "planks_acacia",
+            "dark_oak": "planks_big_oak"
+        }
+    },
     "minecraft:emerald_block": "emerald_block",
     "minecraft:glass": {
         "path": "glass",
@@ -101,6 +111,16 @@
     "minecraft:stone_slab2": {
         "variant": {
             "red_sandstone": ["red_sandstone_normal", "red_sandstone_normal", "red_sandstone_top", "red_sandstone_bottom", "red_sandstone_normal", "red_sandstone_normal"]
+        }
+    },
+    "minecraft:wooden_slab": {
+        "variant": {
+            "oak": "planks_oak",
+            "spruce": "planks_spruce",
+            "birch": "planks_birch",
+            "jungle": "planks_jungle",
+            "acacia": "planks_acacia",
+            "dark_oak": "planks_big_oak"
         }
     }
 }

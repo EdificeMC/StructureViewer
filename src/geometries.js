@@ -129,6 +129,33 @@ function fence(blockData) {
     return mergeGeometries(parts);
 }
 
+function pane(blockData) {
+    const properties = blockData.properties;
+    let parts = [];
+    parts.push(new THREE.BoxGeometry(2/16, 1, 2/16)) // Center post
+    if(properties.north === 'true') {
+        let pane = new THREE.BoxGeometry(2/16, 1, 0.5);
+        pane.translate(0, 0, -0.25);
+        parts.push(pane);
+    }
+    if(properties.south === 'true') {
+        let pane = new THREE.BoxGeometry(2/16, 1, 0.5);
+        pane.translate(0, 0, 0.25);
+        parts.push(pane);
+    }
+    if(properties.east === 'true') {
+        let pane = new THREE.BoxGeometry(0.5, 1, 2/16);
+        pane.translate(0.25, 0, 0);
+        parts.push(pane);
+    }
+    if(properties.west === 'true') {
+        let pane = new THREE.BoxGeometry(0.5, 1, 2/16);
+        pane.translate(-0.25, 0, 0);
+        parts.push(pane);
+    }
+    return mergeGeometries(parts);
+}
+
 function mergeGeometries(geometries) {
     let geometry = new THREE.Geometry();
     for(let geo of geometries) {
@@ -139,5 +166,5 @@ function mergeGeometries(geometries) {
 }
 
 export default {
-    stairs, slab, fence
+    stairs, slab, fence, pane
 }

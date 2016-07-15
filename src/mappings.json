@@ -28,6 +28,12 @@
             "transparent": true
         }
     },
+    "minecraft:glass_pane": {
+        "path": ["glass", "glass", "glass_pane_top", "glass_pane_top", "glass", "glass"],
+        "materialProperties": {
+            "transparent": true
+        }
+    },
     "minecraft:gold_block": "gold_block",
     "minecraft:iron_block": "iron_block",
     "minecraft:lit_redstone_lamp": "redstone_lamp_on",

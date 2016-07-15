@@ -98,6 +98,7 @@ function getMaterial(blockData) {
     // texturePath can potentially be an array of paths instead of a single string
     let texturePath, materialProperties;
     if (blockMapping instanceof Object && !Array.isArray(blockMapping)) {
+        texturePath = blockMapping.path; // By default the texture path will be at the "path" field
         if (properties) {
             for (let key in properties) {
                 if (!blockMapping[key]) {
@@ -106,9 +107,6 @@ function getMaterial(blockData) {
                 }
                 texturePath = blockMapping[key][properties[key]];
             }
-        } else {
-            // The mapping is an object just to specify 3.js related properties, like transparency
-            texturePath = blockMapping.path;
         }
         materialProperties = blockMapping.materialProperties || {};
     } else {

@@ -90,6 +90,45 @@ function stairs(blockData) {
     return geometry;
 }
 
+function fence(blockData) {
+    let parts = [];
+    parts.push(new THREE.BoxGeometry(0.25, 1, 0.25)); // Center post
+    const properties = blockData.properties;
+    if(properties.north === 'true') {
+        let upperBar = new THREE.BoxGeometry(2/16, 3/16, 8/16);
+        upperBar.translate(0, 6/16, -4/16);
+        parts.push(upperBar);
+        let lowerBar = new THREE.BoxGeometry(2/16, 3/16, 8/16);
+        lowerBar.translate(0, -1/16, -4/16);
+        parts.push(lowerBar);
+    }
+    if(properties.south === 'true') {
+        let upperBar = new THREE.BoxGeometry(2/16, 3/16, 8/16);
+        upperBar.translate(0, 6/16, 4/16);
+        parts.push(upperBar);
+        let lowerBar = new THREE.BoxGeometry(2/16, 3/16, 8/16);
+        lowerBar.translate(0, -1/16, 4/16);
+        parts.push(lowerBar);
+    }
+    if(properties.east === 'true') {
+        let upperBar = new THREE.BoxGeometry(8/16, 3/16, 2/16);
+        upperBar.translate(4/16, 6/16, 0/16);
+        parts.push(upperBar);
+        let lowerBar = new THREE.BoxGeometry(8/16, 3/16, 2/16);
+        lowerBar.translate(4/16, -1/16, 0/16);
+        parts.push(lowerBar);
+    }
+    if(properties.west === 'true') {
+        let upperBar = new THREE.BoxGeometry(8/16, 3/16, 2/16);
+        upperBar.translate(-4/16, 6/16, 0/16);
+        parts.push(upperBar);
+        let lowerBar = new THREE.BoxGeometry(8/16, 3/16, 2/16);
+        lowerBar.translate(-4/16, -1/16, 0/16);
+        parts.push(lowerBar);
+    }
+    return mergeGeometries(parts);
+}
+
 function mergeGeometries(geometries) {
     let geometry = new THREE.Geometry();
     for(let geo of geometries) {
@@ -100,5 +139,5 @@ function mergeGeometries(geometries) {
 }
 
 export default {
-    stairs, slab
+    stairs, slab, fence
 }

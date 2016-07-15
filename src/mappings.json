@@ -53,6 +53,7 @@
         }
     },
     "minecraft:redstone_block": "redstone_block",
+    "minecraft:spruce_fence": "planks_spruce",
     "minecraft:spruce_stairs": "planks_spruce",
     "minecraft:stained_glass": {
         "color": {

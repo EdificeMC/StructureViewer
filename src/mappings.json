@@ -74,6 +74,7 @@
             "lines": ["quartz_block_lines", "quartz_block_lines", "quartz_block_lines_top", "quartz_block_lines_top", "quartz_block_lines", "quartz_block_lines"]
         }
     },
+    "minecraft:quartz_stairs": "quartz_block_side",
     "minecraft:redstone_block": "redstone_block",
     "minecraft:spruce_fence": "planks_spruce",
     "minecraft:spruce_stairs": "planks_spruce",

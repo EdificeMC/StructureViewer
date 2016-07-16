@@ -131,6 +131,15 @@ function fence(blockData) {
 
 function pane(blockData) {
     const properties = blockData.properties;
+
+    if(properties.north === 'true' && properties.south === 'true') {
+        return new THREE.BoxGeometry(2/16, 1, 1);
+    }
+
+    if(properties.east === 'true' && properties.west === 'true') {
+        return new THREE.BoxGeometry(1, 1, 2/16);
+    }
+
     let parts = [];
     parts.push(new THREE.BoxGeometry(2/16, 1, 2/16)) // Center post
     if(properties.north === 'true') {

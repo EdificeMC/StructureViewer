@@ -132,15 +132,19 @@ function fence(blockData) {
 function pane(blockData) {
     const properties = blockData.properties;
 
+    let parts = [];
     if(properties.north === 'true' && properties.south === 'true') {
-        return new THREE.BoxGeometry(2/16, 1, 1);
+        parts.push(new THREE.BoxGeometry(2/16, 1, 1));
     }
 
     if(properties.east === 'true' && properties.west === 'true') {
-        return new THREE.BoxGeometry(1, 1, 2/16);
+        parts.push(new THREE.BoxGeometry(1, 1, 2/16));
     }
 
-    let parts = [];
+    if(parts.length > 0) {
+        return mergeGeometries(parts);
+    }
+
     parts.push(new THREE.BoxGeometry(2/16, 1, 2/16)) // Center post
     if(properties.north === 'true') {
         let pane = new THREE.BoxGeometry(2/16, 1, 0.5);

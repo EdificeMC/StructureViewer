@@ -30,6 +30,13 @@ export default function(canvasElement, structureSchematic, spinning) {
     doPassiveSpinning = spinning;
     scene = new THREE.Scene();
 
+    const renderingDetails = structureSchematic.modelRendering;
+    if(renderingDetails) {
+        fov = renderingDetails.fov;
+        lon = renderingDetails.lon;
+        lat = renderingDetails.lat;
+    }
+
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 0;
 

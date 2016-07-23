@@ -1,10 +1,16 @@
 {
   "finalized": true,
+  "modelRendering": {
+    "lat": 13,
+    "texturePack": "Faithful",
+    "fov": 4.89,
+    "lon": 44.900000000000006
+  },
   "creatorUUID": "5d30e92c-5ae2-4284-a3ee-74bc15077439",
   "direction": "EAST",
   "screenshot": {
-    "url": "http://i.imgur.com/fUbYcJt.png",
-    "deletehash": "scDmXQ2KuwxCr6u"
+    "url": "http://i.imgur.com/pUtrZMN.png",
+    "deletehash": "RHtUgpBd2QE8GZl"
   },
   "width": 5,
   "stargazers": [],
@@ -1351,5 +1357,6 @@
         "BlockState": "minecraft:diamond_block"
       }
     }
-  ]
+  ],
+  "id": 5664902681198592
 }

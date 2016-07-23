@@ -11,8 +11,10 @@ import geometries from './geometries';
 const assetsURL = 'https://assets.edificemc.com/';
 const texturePack = 'Faithful';
 
+let canvas;
 let doPassiveSpinning;
 let scene, camera, renderer;
+let cameraFocus;
 let loader = new THREE.TextureLoader();
 loader.crossOrigin = ''; // Allow cross origin requests
 let fov = 10;
@@ -24,10 +26,10 @@ let onMouseDownLon = 0;
 let onMouseDownLat = 0;
 let phi = 0;
 let theta = 0;
-let cameraFocus;
 
-export default function(canvas, structureSchematic, spinning) {
-    doPassiveSpinning = spinning
+export default function(canvasElement, structureSchematic, spinning) {
+    canvas = canvasElement;
+    doPassiveSpinning = spinning;
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
@@ -162,6 +164,11 @@ function getBlockTexture(texturePath) {
 }
 
 function onDocumentMouseDown(event) {
+    const elementMouseIsOver = document.elementFromPoint(event.clientX, event.clientY);
+    if(elementMouseIsOver !== canvas) {
+        return;
+    }
+
     event.preventDefault();
     onMouseDownMouseX = event.clientX;
     onMouseDownMouseY = event.clientY;
@@ -182,6 +189,11 @@ function onDocumentMouseUp(event) {
 }
 
 function onDocumentMouseWheel(event) {
+    const elementMouseIsOver = document.elementFromPoint(event.clientX, event.clientY);
+    if(elementMouseIsOver !== canvas) {
+        return;
+    }
+
     if (event.wheelDeltaY) {
         // WebKit
         fov -= event.wheelDeltaY * 0.01;

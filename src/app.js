@@ -24,8 +24,6 @@ let lon = 0;
 let lat = 0;
 let onMouseDownLon = 0;
 let onMouseDownLat = 0;
-let phi = 0;
-let theta = 0;
 
 export default function(canvasElement, structureSchematic, spinning) {
     canvas = canvasElement;
@@ -163,6 +161,12 @@ function getBlockTexture(texturePath) {
     return loader.load(assetsURL + texturePack + '/assets/minecraft/textures/blocks/' + texturePath + '.png');
 }
 
+export function exportRenderVariables() {
+    return {
+        fov, lon, lat, texturePack
+    };
+}
+
 function onDocumentMouseDown(event) {
     const elementMouseIsOver = document.elementFromPoint(event.clientX, event.clientY);
     if(elementMouseIsOver !== canvas) {
@@ -223,8 +227,8 @@ function animate() {
     }
 
     lat = Math.max(-85, Math.min(85, lat));
-    phi = THREE.Math.degToRad(90 - lat);
-    theta = THREE.Math.degToRad(lon);
+    const phi = THREE.Math.degToRad(90 - lat);
+    const theta = THREE.Math.degToRad(lon);
 
     camera.position.x = 100 * Math.sin(phi) * Math.cos(theta);
     camera.position.y = 100 * Math.cos(phi);

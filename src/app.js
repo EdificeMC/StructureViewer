@@ -25,12 +25,11 @@ let lat = 0;
 let onMouseDownLon = 0;
 let onMouseDownLat = 0;
 
-export default function(canvasElement, structureSchematic, spinning) {
+export default function(canvasElement, schematic, renderingDetails, spinning) {
     canvas = canvasElement;
     doPassiveSpinning = spinning;
     scene = new THREE.Scene();
 
-    const renderingDetails = structureSchematic.modelRendering;
     if(renderingDetails) {
         fov = renderingDetails.fov;
         lon = renderingDetails.lon;

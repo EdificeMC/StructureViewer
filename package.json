@@ -31,6 +31,7 @@
   "dependencies": {
     "lodash.get": "4.3.0",
     "lodash.merge": "4.4.0",
+    "nbt": "^0.6.0",
     "pako": "^1.0.3",
     "three": "0.77.1"
   }

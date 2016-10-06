@@ -25,12 +25,11 @@ let lat = 0;
 let onMouseDownLon = 0;
 let onMouseDownLat = 0;
 
-export default function(canvasElement, structureSchematic, spinning) {
+export default function(canvasElement, schematic, renderingDetails, spinning) {
     canvas = canvasElement;
     doPassiveSpinning = spinning;
     scene = new THREE.Scene();
 
-    const renderingDetails = structureSchematic.modelRendering;
     if(renderingDetails) {
         fov = renderingDetails.fov;
         lon = renderingDetails.lon;
@@ -40,37 +39,60 @@ export default function(canvasElement, structureSchematic, spinning) {
     camera = new THREE.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 0;
 
+    // Transform palette from
+    // { "minecraft:air": 0, "minecraft:dirt": 1 }
+    // to ["minecraft:air", "minecraft:dirt"]
+    schematic.PaletteArray = [];
+    for(let key in schematic.Palette) {
+        schematic.PaletteArray[schematic.Palette[key]] = key;
+    }
+
+    const width = schematic.Width;
+    const height = schematic.Height;
+    const length = schematic.Length;
+
     let count = 0;
     let sumX = 0;
     let sumY = 0;
     let sumZ = 0;
-    for (let block of structureSchematic.blocks) {
-        const rawType = get(block, 'BlockExtendedState.BlockState') || get(block, 'BlockState.BlockState');
-        const blockData = parseBlockType(rawType);
+    for(let x = 0; x < width; x++) {
+        for(let y = 0; y < height; y++) {
+            for(let z = 0; z < length; z++) {
+                const blockArrIndex = x + z * width + y * width * length;
+                const paletteIndex = schematic.BlockData[blockArrIndex];
+                const rawType = schematic.PaletteArray[paletteIndex];
+                const blockData = parseBlockType(rawType);
 
-        let geoFn;
-        for(let geometryType in geometries) {
-            if(blockData.baseType.includes(geometryType)) {
-                geoFn = geometries[geometryType];
+                if(blockData.baseType === 'minecraft:air') {
+                    // Skip all the air
+                    continue;
+                }
+
+                let geoFn;
+                for(let geometryType in geometries) {
+                    if(blockData.baseType.includes(geometryType)) {
+                        geoFn = geometries[geometryType];
+                    }
+                }
+
+                let geometry;
+                if(geoFn) {
+                    geometry = geoFn(blockData);
+                } else {
+                    geometry = new THREE.BoxGeometry(1, 1, 1);
+                }
+
+                geometry.translate(x, y, z);
+
+                const mesh = new THREE.Mesh(geometry, getMaterial(blockData));
+                scene.add(mesh);
+
+                count++;
+                sumX += x;
+                sumY += y;
+                sumZ += z;
             }
         }
-
-        let geometry;
-        if(geoFn) {
-            geometry = geoFn(blockData);
-        } else {
-            geometry = new THREE.BoxGeometry(1, 1, 1);
-        }
-
-        geometry.translate(block.Position.X, block.Position.Y, block.Position.Z);
-
-        let mesh = new THREE.Mesh(geometry, getMaterial(blockData));
-        scene.add(mesh);
-
-        count++;
-        sumX += block.Position.X;
-        sumY += block.Position.Y;
-        sumZ += block.Position.Z;
     }
     // Focus the camera on the middle of the structure
     cameraFocus = new THREE.Vector3(sumX / count, sumY / count, sumZ / count);

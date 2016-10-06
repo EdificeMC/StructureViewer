@@ -1,23 +1,11 @@
 'use strict'
 
 import sv from './app';
-import schem from 'raw!../schematics/citt8qya80000ja3j1siwx0bi.schematic';
 import http from 'axios';
-// import pako from 'pako';
-import nbt from 'nbt';
 
-// http.get('https://storage.googleapis.com/edifice-structures/citt8qya80000ja3j1siwx0bi.schematic')
-//     .then(data => {
-//         console.log('data');
-//         console.log(data);
-//         nbt.parse(data, function(err, data) {
-//             console.log(data);
-//         })
-//         // console.log(pako.ungzip(data));
-//     })
-
-console.log(schem);
-nbt.parse(new Buffer(schem, 'utf-8'), function(err, data) {
-    console.log(data);
-})
-// sv(document.getElementById('structure-model'), schematic, null, true);
+http.get('http://localhost:3000/structures/citun6inr0000813jy7trb6pl?schematic=true')
+    .then(res => res.data)
+    .then(data => {
+        const schematic = data.schematic;
+        sv(document.getElementById('structure-model'), schematic, null, true);
+    })

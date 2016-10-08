@@ -11,6 +11,8 @@ import geometries from './geometries';
 const assetsURL = 'https://assets.edificemc.com/';
 const texturePack = 'Faithful';
 
+const exclude = ['minecraft:air', 'minecraft:tallgrass', 'minecraft:torch'];
+
 let canvas;
 let doPassiveSpinning;
 let scene, camera, renderer;
@@ -63,14 +65,13 @@ export default function(canvasElement, schematic, renderingDetails, spinning) {
                 const rawType = schematic.PaletteArray[paletteIndex];
                 const blockData = parseBlockType(rawType);
 
-                if(blockData.baseType === 'minecraft:air') {
-                    // Skip all the air
+                if(exclude.includes(blockData.baseType)) {
                     continue;
                 }
 
                 let geoFn;
                 for(let geometryType in geometries) {
-                    if(blockData.baseType.includes(geometryType)) {
+                    if(blockData.baseType.includes(geometryType) && !blockData.baseType.includes('double')) {
                         geoFn = geometries[geometryType];
                     }
                 }

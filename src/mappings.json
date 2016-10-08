@@ -5,8 +5,11 @@
             "transparent": true
         }
     },
+    "minecraft:brick_block": "brick",
+    "minecraft:brick_stairs": "brick",
     "minecraft:coal_block": "coal_block",
     "minecraft:cobblestone": "cobblestone",
+    "minecraft:dark_oak_fence": "planks_big_oak",
     "minecraft:dark_oak_stairs": "planks_big_oak",
     "minecraft:diamond_block": "diamond_block",
     "minecraft:dirt": {
@@ -16,6 +19,7 @@
             "podzol": ["dirt_podzol_side", "dirt_podzol_side", "dirt_podzol_top", "dirt", "dirt_podzol_side", "dirt_podzol_side"]
         }
     },
+    "minecraft:double_stone_slab": ["stone_slab_side", "stone_slab_side", "stone_slab_top", "stone_slab_top", "stone_slab_side", "stone_slab_side"],
     "minecraft:double_wooden_slab": {
         "variant": {
             "oak": "planks_oak",
@@ -40,8 +44,39 @@
             "transparent": true
         }
     },
+    "minecraft:glowstone": "glowstone",
     "minecraft:gold_block": "gold_block",
+    "minecraft:grass": {
+        "snowy": {
+            "true": ["grass_side_snowed", "grass_side_snowed", "snow", "dirt", "grass_side_snowed", "grass_side_snowed"],
+            "false": ["grass_side", "grass_side", "grass_top", "dirt", "grass_side", "grass_side"]
+        }
+    },
+    "minecraft:hardened_clay": "hardened_clay",
     "minecraft:iron_block": "iron_block",
+    "minecraft:jungle_fence": "planks_jungle",
+    "minecraft:jungle_stairs": "planks_jungle",
+    "minecraft:lapis_block": "lapis_block",
+    "minecraft:leaves": {
+        "variant": {
+            "oak": "leaves_oak",
+            "spruce": "leaves_spruce",
+            "birch": "leaves_birch",
+            "jungle": "leaves_jungle"
+        },
+        "materialProperties": {
+            "transparent": true
+        }
+    },
+    "minecraft:leaves2": {
+        "variant": {
+            "acacia": "leaves_acacia",
+            "dark_oak": "leaves_big_oak"
+        },
+        "materialProperties": {
+            "transparent": true
+        }
+    },
     "minecraft:lit_redstone_lamp": "redstone_lamp_on",
     "minecraft:log": {
         "variant": {
@@ -67,6 +102,13 @@
             "dark_oak": "planks_big_oak"
         }
     },
+    "minecraft:prismarine": {
+        "variant": {
+            "prismarine": "prismarine_rough",
+            "prismarine_bricks": "prismarine_bricks",
+            "dark_prismarine": "prismarine_dark"
+        }
+    },
     "minecraft:quartz_block": {
         "variant": {
             "default": ["quartz_block_side", "quartz_block_side", "quartz_block_top", "quartz_block_bottom", "quartz_block_side", "quartz_block_side"],
@@ -76,6 +118,21 @@
     },
     "minecraft:quartz_stairs": "quartz_block_side",
     "minecraft:redstone_block": "redstone_block",
+    "minecraft:reeds": {
+        "path": "reeds",
+        "materialProperties": {
+            "transparent": true
+        }
+    },
+    "minecraft:sand": "sand",
+    "minecraft:sandstone": {
+        "type": {
+            "sandstone": ["sandstone_normal", "sandstone_normal", "sandstone_top", "sandstone_bottom", "sandstone_normal", "sandstone_normal"],
+            "chiseled_sandstone": ["sandstone_carved", "sandstone_carved", "sandstone_top", "sandstone_bottom", "sandstone_carved", "sandstone_carved"],
+            "smooth_sandstone": ["sandstone_smooth", "sandstone_smooth", "sandstone_top", "sandstone_bottom", "sandstone_smooth", "sandstone_smooth"]
+        }
+    },
+    "minecraft:sea_lantern": "sea_lantern",
     "minecraft:spruce_fence": "planks_spruce",
     "minecraft:spruce_stairs": "planks_spruce",
     "minecraft:stained_glass": {
@@ -122,6 +179,37 @@
         },
         "materialProperties": {
             "transparent": true
+        }
+    },
+    "minecraft:stained_hardened_clay": {
+        "color": {
+            "white": "hardened_clay_stained_white",
+            "orange": "hardened_clay_stained_orange",
+            "magenta": "hardened_clay_stained_magenta",
+            "lightBlue": "hardened_clay_stained_light_blue",
+            "yellow": "hardened_clay_stained_yellow",
+            "lime": "hardened_clay_stained_lime",
+            "pink": "hardened_clay_stained_pink",
+            "gray": "hardened_clay_stained_gray",
+            "silver": "hardened_clay_stained_silver",
+            "cyan": "hardened_clay_stained_cyan",
+            "purple": "hardened_clay_stained_purple",
+            "blue": "hardened_clay_stained_blue",
+            "brown": "hardened_clay_stained_brown",
+            "green": "hardened_clay_stained_green",
+            "red": "hardened_clay_stained_red",
+            "black": "hardened_clay_stained_black"
+        }
+    },
+    "minecraft:stone": {
+        "variant": {
+            "stone": "stone",
+            "granite": "stone_granite",
+            "smooth_granite": "stone_granite_smooth",
+            "diorite": "stone_diorite",
+            "smooth_diorite": "stone_diorite_smooth",
+            "andesite": "stone_andesite",
+            "smooth_andesite": "stone_andesite_smooth"
         }
     },
     "minecraft:stone_brick_stairs": "stonebrick",

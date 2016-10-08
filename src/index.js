@@ -3,7 +3,7 @@
 import sv from './app';
 import http from 'axios';
 
-http.get('http://localhost:3000/structures/citun6inr0000813jy7trb6pl?schematic=true')
+http.get('https://api.edificemc.com/structures/ciu0kieqt000bagl0qf3yxqye?schematic=true')
     .then(res => res.data)
     .then(data => {
         const schematic = data.schematic;

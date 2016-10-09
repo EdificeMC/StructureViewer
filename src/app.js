@@ -53,10 +53,6 @@ export default function(canvasElement, schematic, renderingDetails, spinning) {
     const height = schematic.Height;
     const length = schematic.Length;
 
-    let count = 0;
-    let sumX = 0;
-    let sumY = 0;
-    let sumZ = 0;
     for(let x = 0; x < width; x++) {
         for(let y = 0; y < height; y++) {
             for(let z = 0; z < length; z++) {
@@ -87,16 +83,12 @@ export default function(canvasElement, schematic, renderingDetails, spinning) {
 
                 const mesh = new THREE.Mesh(geometry, getMaterial(blockData));
                 scene.add(mesh);
-
-                count++;
-                sumX += x;
-                sumY += y;
-                sumZ += z;
             }
         }
     }
+    
     // Focus the camera on the middle of the structure
-    cameraFocus = new THREE.Vector3(sumX / count, sumY / count, sumZ / count);
+    cameraFocus = new THREE.Vector3(width / 2, height / 2, length / 2);
 
     scene.add(new THREE.AmbientLight(0xcccccc))
 

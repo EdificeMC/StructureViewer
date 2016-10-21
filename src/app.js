@@ -11,7 +11,7 @@ import geometries from './geometries';
 const assetsURL = 'https://assets.edificemc.com/';
 const texturePack = 'Faithful';
 
-const exclude = ['minecraft:air', 'minecraft:tallgrass', 'minecraft:torch'];
+const exclude = ['minecraft:air', 'minecraft:tallgrass', 'minecraft:torch', 'minecraft:red_flower', 'minecraft:double_plant'];
 
 let canvas;
 let doPassiveSpinning;

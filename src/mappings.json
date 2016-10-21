@@ -5,6 +5,7 @@
             "transparent": true
         }
     },
+    "minecraft:bookshelf": "bookshelf",
     "minecraft:brick_block": "brick",
     "minecraft:brick_stairs": "brick",
     "minecraft:coal_block": "coal_block",
@@ -92,6 +93,7 @@
             "dark_oak": ["log_big_oak", "log_big_oak", "log_big_oak_top", "log_big_oak_top", "log_big_oak", "log_big_oak"]
         }
     },
+    "minecraft:oak_stairs": "planks_oak",
     "minecraft:planks": {
         "variant": {
             "oak": "planks_oak",
@@ -246,6 +248,26 @@
             "jungle": "planks_jungle",
             "acacia": "planks_acacia",
             "dark_oak": "planks_big_oak"
+        }
+    },
+    "minecraft:wool": {
+        "color": {
+            "white": "wool_colored_white",
+            "orange": "wool_colored_orange",
+            "magenta": "wool_colored_magenta",
+            "lightBlue": "wool_colored_light_blue",
+            "yellow": "wool_colored_yellow",
+            "lime": "wool_colored_lime",
+            "pink": "wool_colored_pink",
+            "gray": "wool_colored_gray",
+            "silver": "wool_colored_silver",
+            "cyan": "wool_colored_cyan",
+            "purple": "wool_colored_purple",
+            "blue": "wool_colored_blue",
+            "brown": "wool_colored_brown",
+            "green": "wool_colored_green",
+            "red": "wool_colored_red",
+            "black": "wool_colored_black"
         }
     }
 }

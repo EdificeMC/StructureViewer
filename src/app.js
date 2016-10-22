@@ -22,8 +22,8 @@ loader.crossOrigin = ''; // Allow cross origin requests
 let fov = 10;
 let onMouseDownMouseX = 0;
 let onMouseDownMouseY = 0;
-let lon = 0;
-let lat = 0;
+let lon = 45;
+let lat = 20;
 let onMouseDownLon = 0;
 let onMouseDownLat = 0;
 
